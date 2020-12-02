@@ -1,4 +1,4 @@
-{%- if category[0] == "1" -%}
+<!-- {%- if category[0] == "1" -%}
 第一篇 短诗(1983-1986)
 {%- elsif category[0] == "2" -%}
 第二篇 长诗(1984-1985)
@@ -8,6 +8,20 @@
 第四篇 太阳·七部书(1986-1986)
 {%- elsif category[0] == "5" -%}
 第五篇 文论
+{%- else -%}
+其它
+{%- endif -%} -->
+
+{%- if category[0] == "1" -%}
+短诗(83-86)
+{%- elsif category[0] == "2" -%}
+长诗
+{%- elsif category[0] == "3" -%}
+短诗(87-89)
+{%- elsif category[0] == "4" -%}
+太阳·七部书
+{%- elsif category[0] == "5" -%}
+文论
 {%- else -%}
 其它
 {%- endif -%}

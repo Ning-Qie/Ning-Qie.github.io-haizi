@@ -31,6 +31,18 @@ layout: default
       {{ content | toc | img_prefix }}
     </div>
   </article>
+  <aside class="post__contact">
+    {% if page.previous %}
+    <h4><a href="{{ BASE_PATH }}{{ page.previous.url }}">
+      上一篇：<font class="next_pre_post">{{ page.previous.title }}</font>
+    </a></h4>
+    {% endif %}
+    {% if page.next %}
+    <h4><a href="{{ BASE_PATH }}{{ page.previous.url }}">
+      下一篇：<font class="next_pre_post">{{ page.next.title }}</font>
+    </a></h4>
+    {% endif %}
+  </aside>
   <!-- {%- if site.comment.enabled -%}
   {% include comments.html -%}
   {%- else -%}
@@ -41,3 +53,27 @@ layout: default
   <script>hljs.initHighlightingOnLoad();</script>
 {%- endif -%}
 {%- include footer.html -%}
+
+
+
+<!--站点标题自动隐藏-->
+<script>
+  window.onscroll = function() {
+      var title_height = document.getElementsByClassName("logo")[0].getBoundingClientRect().bottom;
+      var mulu_height = document.getElementsByClassName("post__top_navs")[0].getBoundingClientRect().top;
+      console.log("t_h:"+title_height);
+      console.log("mp_h:"+mulu_height);
+      // var post_header_thumb_bottom_height = document.getElementsByClassName("post-header-thumb")[0].getBoundingClientRect().bottom;
+      // var common_container_top_height = document.getElementsByClassName("common-container")[0].getBoundingClientRect().top;
+      //console.log("common-container:"+common_container_top_height);
+      //console.log("navigation:"+navigation_bottom_height);
+      if(mulu_height-title_height<=0){ 
+          document.getElementsByClassName("logo")[0].style.opacity = 0;
+          console.log("隐藏");
+      }
+      else{
+          document.getElementsByClassName("logo")[0].style.opacity = 1;
+          console.log("显示");
+      }
+    }
+</script>
