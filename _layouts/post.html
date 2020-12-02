@@ -15,26 +15,27 @@ layout: default
           </svg>
           <span class="post__archive_icon"></span>
         </div>
-        {{ site.theme_setting.lang.blog_title | default: site.title }}
+        <!-- {{ site.theme_setting.lang.blog_title | default: site.title }} -->
+        目录
       </a>
     </nav>
   </div>
   <article class="post">
     <header class="post__header">
       <h1 class="post__title">{{ page.title | escape }}</h1>
-      <div class="post__meta">
+      <!-- <div class="post__meta">
         <time>{{ page.date | date: "%Y-%m-%d %H:%M" }}</time>
-      </div>
+      </div> -->
     </header>
     <div class="post__content content">
       {{ content | toc | img_prefix }}
     </div>
   </article>
-  {%- if site.comment.enabled -%}
+  <!-- {%- if site.comment.enabled -%}
   {% include comments.html -%}
   {%- else -%}
   {% include contact.html -%}
-  {%- endif -%}
+  {%- endif -%} -->
 </main>
 {%- if site.theme_setting.code or page.code -%}
   <script>hljs.initHighlightingOnLoad();</script>
