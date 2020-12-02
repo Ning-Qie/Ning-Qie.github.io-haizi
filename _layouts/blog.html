@@ -18,8 +18,9 @@ layout: default
   </nav>
 	{%- endif -%}
   <div class="post__list archive__list">
-    {%- assign years = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
-    {%- for year in years %}
+    <!-- {%- assign years = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %} -->
+    {%- assign years = site.posts | group_by_exp: "post", "post.url" %}
+    {%- for year in years reversed %}
       <!-- <h3 class="post__list_title">{{ year.name }}</h3> -->
       {%- assign posts = year.items %}
       <ul>
@@ -36,3 +37,23 @@ layout: default
   </div>
 </main>
 {%- include footer.html -%}
+
+
+
+<!--站点标题自动隐藏-->
+<script>
+  window.onscroll = function() {
+      var title_height = document.getElementsByClassName("logo")[0].getBoundingClientRect().bottom;
+      var mulu_height = document.getElementsByClassName("blog__categories")[0].getBoundingClientRect().top;
+      // console.log("t_h:"+title_height);
+      // console.log("mp_h:"+mulu_height);
+      if(mulu_height-title_height<=0){ 
+          document.getElementsByClassName("logo")[0].style.opacity = 0;
+          // console.log("隐藏");
+      }
+      else{
+          document.getElementsByClassName("logo")[0].style.opacity = 1;
+          // console.log("显示");
+      }
+    }
+</script>

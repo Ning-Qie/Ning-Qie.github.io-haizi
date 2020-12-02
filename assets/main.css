@@ -9,7 +9,6 @@
     margin: .875rem 0;
     position: relative;
 }
-
 .post__list_item_ning a {
     transition: color .125s ease-in;
 }
@@ -17,6 +16,9 @@
     display: block;
     width: 100%;
     padding: .5rem 0;
+}
+.post__list_item{
+    margin: 2px 0;
 }
 .post__list_item a:hover {
     color: #5b8bbd;
