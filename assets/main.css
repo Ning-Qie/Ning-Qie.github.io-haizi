@@ -61,3 +61,29 @@
     font-family: fangsong;
     padding-top: 20px;
 }
+.post__contact {
+    display: block;
+    padding: 1.5rem 0 0.5rem 0;
+    background-color: white;
+    bottom: 0px;
+    position: fixed !important;
+}
+.post__contact h4 {
+    width: unset;
+    padding-right: 20%;
+    font-size: inherit;
+    float: left;
+}
+.post__contact:before {
+    width: 50%;
+    display: none !important;
+}
+.post__archive_path a {
+    display: unset;
+}
+.ning-post-category {
+    float: inherit;
+    right: 15%;
+    padding: 9px 0;
+    position: absolute;
+}
