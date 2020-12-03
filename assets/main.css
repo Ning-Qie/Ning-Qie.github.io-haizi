@@ -34,3 +34,30 @@
     font-size: smaller;
     color: #5b8bbd;
 }
+
+.logo{
+    position: fixed !important;
+}
+/* .blog__categories{
+    border-bottom-color: #5e8eb9;
+    border-bottom-style: inset;
+    border-bottom-width: 1px;
+} */
+
+.post__wrapper {
+    padding: 1.5rem 2rem;
+}
+.post__archive {
+    padding: 1.5rem 2rem;
+}
+
+.xu{
+    
+    font-family: cursive;
+}
+.zhushi{
+    border-top-width: 1px;
+    border-top-style: groove;
+    font-family: fangsong;
+    padding-top: 20px;
+}

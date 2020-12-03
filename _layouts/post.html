@@ -23,6 +23,9 @@ layout: default
   <article class="post">
     <header class="post__header">
       <h1 class="post__title">{{ page.title | escape }}</h1>
+      {% if page.subtitle %}
+        <h4>{{ page.subtitle }}</h4>
+      {% endif %}
       <!-- <div class="post__meta">
         <time>{{ page.date | date: "%Y-%m-%d %H:%M" }}</time>
       </div> -->
@@ -33,13 +36,15 @@ layout: default
   </article>
   <aside class="post__contact">
     {% if page.previous %}
-    <h4><a href="{{ BASE_PATH }}{{ page.previous.url }}">
-      上一篇：<font class="next_pre_post">{{ page.previous.title }}</font>
+    <h4>上一篇：
+      <a href="{{ BASE_PATH }}{{ page.previous.url }}">
+      <font class="next_pre_post">{{ page.previous.title }}</font>
     </a></h4>
     {% endif %}
     {% if page.next %}
-    <h4><a href="{{ BASE_PATH }}{{ page.next.url }}">
-      下一篇：<font class="next_pre_post">{{ page.next.title }}</font>
+    <h4>下一篇：
+      <a href="{{ BASE_PATH }}{{ page.next.url }}">
+      <font class="next_pre_post">{{ page.next.title }}</font>
     </a></h4>
     {% endif %}
   </aside>
