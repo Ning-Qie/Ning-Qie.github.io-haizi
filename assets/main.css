@@ -28,10 +28,9 @@
     max-width: fit-content;
 }
 .next_pre_post{
-    font-size: smaller;
+    font-size: large;
 }
 .next_pre_post:hover{
-    font-size: smaller;
     color: #5b8bbd;
 }
 
@@ -71,7 +70,7 @@
 .post__contact h4 {
     width: unset;
     padding-right: 20%;
-    font-size: inherit;
+    font-size: x-small;
     float: left;
 }
 .post__contact:before {
