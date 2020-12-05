@@ -6,6 +6,16 @@ layout: default
 
 <main class="post__archive" id="postArchive">
   {%- include header_nav.html -%}
+  <nav class="top-nav">
+    <div class="navbar-search" onclick="">
+      <span class="icon-search"></span>
+      <form id="search" method="get" action="/search" role="search" target="_self">
+          <span class="search-box">
+              <input type="text" id="input" class="input" name="keyword" required="true" placeholder="搜索..." maxlength="30" autocomplete="off">
+          </span>
+      </form>
+  </div>
+  </nav>
   {%- if site.status -%}
   {%- include status.html -%}
   {%- endif -%}

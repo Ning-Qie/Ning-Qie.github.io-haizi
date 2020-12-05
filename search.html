@@ -1,0 +1,242 @@
+---
+layout: default
+title: 搜索
+permalink: /search
+---
+
+
+<style>
+    #search-input {
+        display: none;
+    }
+
+    #search-demo-container {
+        text-align: justify;
+        font-family: fangsong;
+    }
+
+    #search-tittle {
+        margin-top: 50px;
+    }
+
+    .common-title::before {
+        position: inherit;
+        padding: 0 10px 0 10px;
+        content: '#';
+        color: #20B2AA;
+    }
+
+    .common-title {
+        font-size: 25px;
+        font-family: cursive;
+        color: #5f5f5f;
+    }
+
+    #search-input {
+        width: 65%;
+        height: 35px;
+        color: #333;
+        background-color: rgba(227, 231, 236, .2);
+        line-height: 35px;
+        padding: 0px 16px;
+        border: 1px solid #c0c0c0;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 17px;
+        outline: none;
+        box-sizing: border-box;
+        /*box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);*/
+        margin-top: 30px;
+        margin-left: 20px;
+    }
+
+    #search-input:focus {
+        outline: none;
+        border-color: rgb(102, 175, 233);
+        background-color: #fff;
+        /*box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px #007fff;*/
+    }
+    #results-container{
+        margin-top: 25px;
+    }
+    ul {
+        margin-left: 50px;
+        line-height: 35px;
+    }
+    .post__archive {
+    max-width: 70%;
+    }
+</style>
+
+{% include header.html %}
+
+<main class="post__archive" id="postArchive">
+  <div class="post__list archive__list">
+        <div id="search-tittle" class="common-title">
+            搜索 : ---
+        </div>
+        
+        <div id="search-demo-container">
+            <input type="search" id="search-input" placeholder="search..." value="" autocomplete="off">
+            <ul id="results-container"></ul>
+        </div>
+  </div>
+</main>
+{%- include footer.html -%}
+
+
+
+<script src="/assets/js/simple-jekyll-search.min.js"></script>
+
+
+<script>
+    window.simpleJekyllSearch = new SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('results-container'),
+        json: '/search.json',
+        searchResultTemplate: '<li><a href="{url}?query={query}" title="{desc}" target="_blank">{title}</a></li>',
+        noResultsText: '没有找到内容,请换别的关键字进行检索',
+        limit: 500,
+        fuzzy: false,
+        exclude: ['Welcome']
+    })
+    //console.log(document.getElementById('search-input'));
+</script>
+
+
+<script>
+    function GetQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg); //获取url中"?"符后的字符串并正则匹配
+        var context = "";
+        if (r != null)
+            context = r[2];
+        reg = null;
+        r = null;
+        return context == null || context == "" || context == "undefined" ? "" : context;
+    }
+
+
+    //将URL中的UTF-8字符串转成中文字符串
+    function getCharFromUtf8(str) {
+        var cstr = "";
+        var nOffset = 0;
+        if (str == "")
+            return "";
+        str = str.toLowerCase();
+        nOffset = str.indexOf("%e");
+        if (nOffset == -1)
+            return str;
+        while (nOffset != -1) {
+            cstr += str.substr(0, nOffset);
+            str = str.substr(nOffset, str.length - nOffset);
+            if (str == "" || str.length < 9)
+                return cstr;
+            cstr += utf8ToChar(str.substr(0, 9));
+            str = str.substr(9, str.length - 9);
+            nOffset = str.indexOf("%e");
+        }
+        return cstr + str;
+    }
+
+    //将编码转换成字符
+    function utf8ToChar(str) {
+        var iCode, iCode1, iCode2;
+        iCode = parseInt("0x" + str.substr(1, 2));
+        iCode1 = parseInt("0x" + str.substr(4, 2));
+        iCode2 = parseInt("0x" + str.substr(7, 2));
+        return String.fromCharCode(((iCode & 0x0F) << 12) | ((iCode1 & 0x3F) << 6) | (iCode2 & 0x3F));
+    }
+
+
+
+    function saerch_change() {
+        var input = document.getElementById("search-input");
+        input.value = getCharFromUtf8(GetQueryString("keyword"));
+        var evt = document.createEvent('HTMLEvents');
+        evt.initEvent('input', true, true);
+        input.dispatchEvent(evt);
+        //console.log('saerch_change！')
+        document.getElementById("search-tittle").innerHTML = "搜索 :" + "&nbsp;&nbsp;" + getCharFromUtf8(GetQueryString("keyword"));
+    }
+    const id = setInterval(saerch_change, 10);
+    setTimeout(() => {
+        clearInterval(id);
+        //console.log('1:我结束定时器id了！')
+    }, 1000);
+    
+    var s_r=0;
+    function get_sr() {
+        s_r = document.getElementById("results-container").getElementsByTagName("li").length;
+        //console.log(s_r);
+    }
+    const id_sr = setInterval(get_sr, 10);
+    setTimeout(() => {
+        clearInterval(id_sr);
+        //console.log('我结束定时器id_sr了！')
+    }, 1000);
+    
+    function vvv() {
+        if (s_r == 0) {
+            //console.log("no found!");
+            document.getElementById("search-input").style.display = "block";
+            //document.getElementById("search-tittle").innerHTML = "Search :";
+        }
+        else{
+            document.getElementById("search-input").style.display = "none";
+            clearInterval(id);
+            //console.log('2:我结束定时器id了！')
+        }
+    }
+    const id_vvv = setInterval(vvv, 10);
+    setTimeout(() => {
+        clearInterval(id_vvv);
+        //console.log('我结束定时器id_vvv了！')
+    }, 1000);
+
+    setTimeout(() => {
+        document.getElementById("search-input").addEventListener("input", function () {
+        clearInterval(id);
+        document.getElementById("search-tittle").innerHTML = "Search :";
+    });
+    }, 1000);
+</script>
+
+<script>
+    function day_(){
+        day();
+    }
+    function night_(){
+        night();
+    }
+    function nod(){
+        var n_o_d = document.getElementById("night_or_day").value;
+        console.log(n_o_d);
+        if(n_o_d=="night"){
+            night();
+        }
+        else if(n_o_d=="day"){
+            day();
+        }
+    }
+    setInterval(nod,100);
+</script>
+
+
+<!--站点标题自动隐藏-->
+<script>
+    window.onscroll = function() {
+        var title_height = document.getElementsByClassName("logo")[0].getBoundingClientRect().bottom;
+        var mulu_height = document.getElementsByClassName("blog__categories")[0].getBoundingClientRect().top;
+        // console.log("t_h:"+title_height);
+        // console.log("mp_h:"+mulu_height);
+        if(mulu_height-title_height<=0){ 
+            document.getElementsByClassName("logo")[0].style.opacity = 0;
+            // console.log("隐藏");
+        }
+        else{
+            document.getElementsByClassName("logo")[0].style.opacity = 1;
+            // console.log("显示");
+        }
+      }
+  </script>
