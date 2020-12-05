@@ -71,16 +71,25 @@ permalink: /search
 {% include header.html %}
 
 <main class="post__archive" id="postArchive">
-  <div class="post__list archive__list">
-        <div id="search-tittle" class="common-title">
-            搜索 : ---
+    <nav class="top-nav">
+        <div class="navbar-search" onclick="">
+            <span class="icon-search"></span>
+            <form id="search" method="get" action="/search" role="search" target="_self">
+                <span class="search-box">
+                    <input type="text" id="input" class="input" name="keyword" required="true" placeholder="搜索..." maxlength="30" autocomplete="off">
+                </span>
+            </form>
         </div>
-        
-        <div id="search-demo-container">
-            <input type="search" id="search-input" placeholder="search..." value="" autocomplete="off">
-            <ul id="results-container"></ul>
-        </div>
-  </div>
+    </nav>
+    <div class="post__list archive__list">
+            <div id="search-tittle" class="common-title">
+                搜索 : ---
+            </div>
+            <div id="search-demo-container">
+                <input type="search" id="search-input" placeholder="search..." value="" autocomplete="off">
+                <ul id="results-container"></ul>
+            </div>
+    </div>
 </main>
 {%- include footer.html -%}
 
@@ -197,7 +206,7 @@ permalink: /search
     setTimeout(() => {
         document.getElementById("search-input").addEventListener("input", function () {
         clearInterval(id);
-        document.getElementById("search-tittle").innerHTML = "Search :";
+        document.getElementById("search-tittle").innerHTML = "搜索 :";
     });
     }, 1000);
 </script>
