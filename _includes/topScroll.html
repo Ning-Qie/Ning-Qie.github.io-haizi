@@ -1,0 +1,51 @@
+<link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.5.0/css/all.css" rel="stylesheet">
+
+<style>
+    /* 回到顶部悬浮按钮 */
+    .top-scroll {
+        display: none;
+        position: fixed;
+        right: 10%;
+        bottom: 5%;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    .top-scroll .btn-floating {
+        background: #7b9793;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    .btn-floating i {
+        width: inherit;
+        display: inline-block;
+        text-align: center;
+        color: #fff;
+        font-size: 1.6rem;
+        line-height: 40px;
+        font-size: 1.2rem !important;
+    }
+</style>
+
+<div id="backTop" class="top-scroll" style="display: block;">
+    <a class="btn-floating" href="#">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+<div id="js-content">
+    <script>
+        document.getElementById("backTop").setAttribute("style", "display:none;");
+        window.addEventListener("scroll", backtop_change);
+
+        function backtop_change() {
+            var toph = document.documentElement.scrollTop || document.body.scrollTop;
+            // console.log(toph);
+            if (toph < 50) document.getElementById("backTop").setAttribute("style", "display:none;");
+            else document.getElementById("backTop").setAttribute("style", "display:block;");
+        }
+    </script>
+</div>
