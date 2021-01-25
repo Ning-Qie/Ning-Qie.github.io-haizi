@@ -63,21 +63,35 @@ layout: default
 {%- include footer.html -%}
 
 
-
-<!--站点标题自动隐藏-->
-<script>
-  window.onscroll = function() {
-      var title_height = document.getElementsByClassName("logo")[0].getBoundingClientRect().bottom;
-      var mulu_height = document.getElementsByClassName("post__top_navs")[0].getBoundingClientRect().top;
-      // console.log("t_h:"+title_height);
-      // console.log("mp_h:"+mulu_height);
-      if(mulu_height-title_height<=0){ 
-          document.getElementsByClassName("logo")[0].style.opacity = 0;
-          // console.log("隐藏");
-      }
-      else{
-          document.getElementsByClassName("logo")[0].style.opacity = 1;
-          // console.log("显示");
-      }
+<div id="js-content">
+  <!--上下篇导航自动隐藏-->
+  <script>
+    var item1 = document.getElementsByClassName("post__contact")[0];
+    item1.setAttribute("style", "display:none;");
+    window.addEventListener("scroll",post_contact_change);
+    function post_contact_change() {
+      item1.setAttribute("style", "display:block;");
+      var c = setTimeout(function(){
+        item1.setAttribute("style", "display:none;");
+      },3000);
     }
-</script>
+  </script>
+
+  <!--站点标题自动隐藏-->
+  <script>
+    window.onscroll = function() {
+        var title_height = document.getElementsByClassName("logo")[0].getBoundingClientRect().bottom;
+        var mulu_height = document.getElementsByClassName("post__top_navs")[0].getBoundingClientRect().top;
+        // console.log("t_h:"+title_height);
+        // console.log("mp_h:"+mulu_height);
+        if(mulu_height-title_height<=0){
+            document.getElementsByClassName("logo")[0].style.opacity = 0;
+            // console.log("隐藏");
+        }
+        else{
+            document.getElementsByClassName("logo")[0].style.opacity = 1;
+            // console.log("显示");
+        }
+      }
+  </script>
+</div>

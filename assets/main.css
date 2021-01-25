@@ -2625,3 +2625,12 @@ textarea.form-control {
 .top-nav {
     position: relative;
 }
+
+
+@media screen and (max-width:768px) {
+    .logo {
+        left: 38%;
+        top: 2%;
+        position: fixed !important;
+    }
+}
